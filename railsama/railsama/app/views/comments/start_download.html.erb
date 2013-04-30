@@ -1,0 +1,13 @@
+<h1> hi </h1>
+
+<table>
+<%= @id  %>
+<%= @op  %>
+<%= @comments.each do |comm|  %>
+	<tr>
+		<td> <%= comm.author %></td>
+	</tr>
+<% end %>
+</table>
+
+
