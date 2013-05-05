@@ -1,3 +1,6 @@
 class Comment < ActiveRecord::Base	
-	attr_accessible :body, :unique_id, :parent_id, :author
+	attr_accessible :body
+	attr_accessible :unique_id
+	attr_accessible :parent_id
+	attr_accessible :author
 end
