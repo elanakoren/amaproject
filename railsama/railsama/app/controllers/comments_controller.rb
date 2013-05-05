@@ -34,7 +34,7 @@ end
 
 def traverse_thread(thread, list, op)
         if thread['author'] == op
-		h = {:text => thread['body'], :unique_id => thread['name'], :parent_id => thread['parent_id'], :author => thread['author']}
+		h = {:body => thread['body'], :unique_id => thread['name'], :parent_id => thread['parent_id'], :author => thread['author']}
             	comm = Comment.new(h)  
             	@list.push(comm)
 
