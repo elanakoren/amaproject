@@ -1,7 +1,7 @@
 Railsama::Application.routes.draw do 
   resources :comments
   
-  match "/scan/:id" => "comments#start_download"
+  match "/scan/:id" => "comments#start_download", :constraints => {:id => /.*/}
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

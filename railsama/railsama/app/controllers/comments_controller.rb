@@ -16,8 +16,8 @@ class CommentsController < ApplicationController
   end
 
   def start_download
-	@url = "http://www.reddit.com/r/aww/comments/1d8g0p/aaaaaah/.json"
 	@id = params[:id]
+	@url = "http://www.reddit.com/r/IAMA/comments/" + @id + "/.json"
 	@resp = Net::HTTP.get_response(URI.parse(@url))
 	@resp_text = @resp.body
 	@result = JSON.parse(@resp_text)
