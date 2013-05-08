@@ -39,7 +39,7 @@ def traverse_thread(thread, list, op)
             	@list.push(comm)
 
         end
-        unless thread['replies']['data'].nil?
+        unless thread['replies'].nil? or thread['replies']['data'].nil?
             thread['replies']['data']['children'].each do |reply|
                 traverse_thread(reply['data'], @list, op)
         end
