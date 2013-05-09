@@ -67,7 +67,7 @@ def get_parent(thread, comment, masterlist)
         parent.parent_id = thread['parent_id']
         parent.author = thread['author']
         sublist = [parent, comment]
-        masterlist.concat(sublist)
+        masterlist.push(sublist)
     end
     unless thread['replies'].nil? or thread['replies']['data'].nil?
         thread['replies']['data']['children'].each do |reply|

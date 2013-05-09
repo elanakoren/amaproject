@@ -1,10 +1,20 @@
-<h1> hi </h1>
-
-<%= @id  %>
-<%= @op  %>
-<%= @list  %>
-<h1> this is a boundary marker </h1>
-
-<%= @masterlist %>
-
-
+<h1>Listing Questions and Answers</h1>
+ 
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+<% @masterlist.each do |list| %>
+	<% list.each do |sublist|%>
+  <tr>
+    <td><%= sublist.body %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+ 
+<br />
+ 
