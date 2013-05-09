@@ -1,26 +1,10 @@
 <h1>Listing Questions and Answers</h1>
  
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-</div>
-
-</div>
 <% @masterlist.each do |list| %>
 	<% list.each do |sublist|%>
-  <tr>
 	<div style="width:96.5%;border:1px solid gray;padding:8px;background:#e1efbb no-repeat bottom right">
     <p style="margin-right:150px;"><%= sublist.body %></p>
 	</div>
-  </tr>
 <% end %>
 <br>
 <% end %>
-</table>
- 
-<br />
- 
