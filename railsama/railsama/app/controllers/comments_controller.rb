@@ -14,10 +14,10 @@ class CommentsController < ApplicationController
       format.json { render json: @comments }
     end
   end
-
+       
   def start_download
       @id = params[:id]
-      @url = "http://www.reddit.com/r/IAMA/comments/" + @id + "/.json"
+      @url =  @id + "/.json"
       @resp = Net::HTTP.get_response(URI.parse(@url))
       @resp_text = @resp.body
       @result = JSON.parse(@resp_text)
@@ -28,11 +28,21 @@ class CommentsController < ApplicationController
       toplevel(@result, @list, @op)
       find_parent(@list, @result, @masterlist) 
     end
+    
+    def form
+        
+    end
 
     def toplevel(result, list, op)    
         result[1]['data']['children'].each do |x|
         	traverse_thread(x['data'], @list, op)
     	end
+   end
+
+   def top_parent(comment, result, masterlist)
+       result[1]['data']['children'].each do |x|
+           get_parent(x['data'], comment, masterlist)
+       end
    end
 
    def traverse_thread(thread, list, op)
@@ -51,12 +61,6 @@ class CommentsController < ApplicationController
     def find_parent(list, result, masterlist)
         list.each do |comment|
             top_parent(comment, result, masterlist)
-        end
-    end
-
-    def top_parent(comment, result, masterlist)
-        result[1]['data']['children'].each do |x|
-            get_parent(x['data'], comment, masterlist)
         end
     end
 
