@@ -25,7 +25,7 @@ class AmasController < ApplicationController
   # GET /amas/new.json
   def new
     @ama = Ama.new
-
+ 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @ama }
@@ -40,10 +40,10 @@ class AmasController < ApplicationController
   # POST /amas
   # POST /amas.json
   def create
-    @ama = Ama.new(params[:ama])
+    @ama = Ama.find_or_create_by_url(params[:ama][:url])
 
     respond_to do |format|
-      if @ama.save
+      if @ama.save and @ama.update 
         format.html { redirect_to @ama, notice: 'Ama was successfully created.' }
         format.json { render json: @ama, status: :created, location: @ama }
       else
