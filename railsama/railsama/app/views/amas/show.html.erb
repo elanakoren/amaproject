@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Url:</b>
+  <%= @ama.url %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @ama.author %>
+</p>
+
+
+<%= link_to 'Edit', edit_ama_path(@ama) %> |
+<%= link_to 'Back', amas_path %>

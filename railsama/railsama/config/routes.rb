@@ -1,4 +1,7 @@
 Railsama::Application.routes.draw do 
+  resources :amas
+
+
   resources :comments
   
   match "/scan/:id" => "comments#start_download", :constraints => {:id => /.*/}
