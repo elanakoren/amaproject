@@ -5,12 +5,12 @@ require 'comment'
 
 class Ama < ActiveRecord::Base
   attr_accessible :author, :url, :title
-  has_many :comments
+  has_many :comments, :dependent => :destroy
   
-  def update
+  def download
     result = JSON.parse(Net::HTTP.get_response(URI.parse(url + ".json")).body)
-    author = result[0]['data']['children'][0]['data']['author']
-    title = result[0]['data']['children'][0]['data']['title']
+    self.author = result[0]['data']['children'][0]['data']['author']
+    self.title = result[0]['data']['children'][0]['data']['title']
     toplevel(result)
   end
   
@@ -34,7 +34,8 @@ class Ama < ActiveRecord::Base
   
   def create_comment(thread)
     h = {:body => thread['body'], :unique_id => thread['name'], :parent_id => thread['parent_id'], :author => thread['author']}
-    comment = Comment.new(h)
+    comment = Comment.find_or_create_by_unique_id(thread['name'])
+    comment.update_attributes(h)
     comment.ama = self
     comment.save
   end

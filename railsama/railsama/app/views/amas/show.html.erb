@@ -10,6 +10,13 @@
   <%= @ama.author %>
 </p>
 
+<% @ama.comments do |sublist|%>
+	<div style="margin:10px;width:76.5%;border:1px solid gray;padding:8px;background:#AFEEEE">
+	<p><%= sublist.author %> writes:</p>
+    <p><%= sublist.body %></p>
+	</div>
+<% end %>
+<br>
 
 <%= link_to 'Edit', edit_ama_path(@ama) %> |
 <%= link_to 'Back', amas_path %>

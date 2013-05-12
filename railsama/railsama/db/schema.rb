@@ -22,6 +22,6 @@ ActiveRecord::Schema.define(:version => 20130511222938) do
   end
 
 # Could not dump table "comments" because of following StandardError
-#   Unknown type 'reference' for column 'ama'
+#   Unknown type 'reference' for column 'ama_id'
 
 end

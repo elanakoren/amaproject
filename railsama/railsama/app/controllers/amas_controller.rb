@@ -43,7 +43,7 @@ class AmasController < ApplicationController
     @ama = Ama.find_or_create_by_url(params[:ama][:url])
 
     respond_to do |format|
-      if @ama.save and @ama.update 
+      if @ama.save and @ama.download
         format.html { redirect_to @ama, notice: 'Ama was successfully created.' }
         format.json { render json: @ama, status: :created, location: @ama }
       else
