@@ -8,11 +8,10 @@ class Ama < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   
   def download
-    if date.nil? or Time.now-date > 60 # don't hit the same thread more than once per minute
+    if date.nil? or Time.now - date > 60 # don't hit the same thread more than once per minute
       result = JSON.parse(Net::HTTP.get_response(URI.parse(url + ".json")).body)
-      self.author = result[0]['data']['children'][0]['data']['author']
-      self.title = result[0]['data']['children'][0]['data']['title']
-      self.date = Time.now
+      h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'], :date => Time.now}
+      self.update_attributes(h)
       toplevel(result)
     end
   end
