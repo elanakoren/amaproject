@@ -14,73 +14,7 @@ class CommentsController < ApplicationController
       format.json { render json: @comments }
     end
   end
-       
-  def start_download
-      @id = params[:id]
-      @url =  @id + "/.json"
-      @resp = Net::HTTP.get_response(URI.parse(@url))
-      @resp_text = @resp.body
-      @result = JSON.parse(@resp_text)
-      @op = @result[0]['data']['children'][0]['data']['author']
-      @title = @result[0]['data']['children'][0]['data']['title']
-      @list = Array.new
-      @masterlist = Array.new 
-      toplevel(@result, @list, @op)
-      find_parent(@list, @result, @masterlist) 
-    end
-    
-    def form
-        
-    end
-
-    def toplevel(result, list, op)    
-        result[1]['data']['children'].each do |x|
-        	traverse_thread(x['data'], @list, op)
-    	end
-   end
-
-   def top_parent(comment, result, masterlist)
-       result[1]['data']['children'].each do |x|
-           get_parent(x['data'], comment, masterlist)
-       end
-   end
-
-   def traverse_thread(thread, list, op)
-       if thread['author'] == op
-           h = {:body => thread['body'], :unique_id => thread['name'], :parent_id => thread['parent_id'], :author => thread['author']}
-            	comm = Comment.new(h)  
-            	@list.push(comm)
-        end
-        unless thread['replies'].nil? or thread['replies']['data'].nil?
-            thread['replies']['data']['children'].each do |reply|
-                traverse_thread(reply['data'], @list, op)
-            end
-        end
-    end
-
-    def find_parent(list, result, masterlist)
-        list.each do |comment|
-            top_parent(comment, result, masterlist)
-        end
-    end
-
-    def get_parent(thread, comment, masterlist)
-        if thread['name'] == comment.parent_id
-            parent = Comment.new
-            parent.body = thread['body']
-            parent.unique_id = thread['name']
-            parent.parent_id = thread['parent_id']
-            parent.author = thread['author']
-            sublist = [parent, comment]
-            masterlist.push(sublist)
-        end
-        unless thread['replies'].nil? or thread['replies']['data'].nil?
-            thread['replies']['data']['children'].each do |reply|
-                get_parent(reply['data'], comment, masterlist)
-            end
-        end
-    end	
-
+  
   # GET /comments/1
   # GET /comments/1.json
   def show
