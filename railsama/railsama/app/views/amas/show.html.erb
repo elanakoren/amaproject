@@ -1,26 +1,17 @@
-<p id="notice"><%= notice %></p>
+<h1 class = "h1_neat" style = "margin:10px">
+	<% @profile_link = "http://www.reddit.com/user/#{@ama.author}"%>
+	<a href="<%=@ama.url%>">"<%= @ama.title %>"</a> by 
+	<a href="<%=@profile_link%>"><%=@ama.author %></a>
+</h1>
 
-<p>
-  <b>Url:</b>
-  <%= @ama.url %>
-</p>
-
-<p>
-  <b>Author:</b>
-  <%= @ama.author %>
-</p>
-
-<p>
-	<%=@ama.title%>
-	<%=@ama.date%>
-	
-</p>
 <%@ama.comments.each do |comm|%>
-	<div style="margin:10px;width:76.5%;border:1px solid gray;padding:8px;background:#AFEEEE">
+	<%if comm.parent_id == @ama.threadhash %>
+		<br>
+		<br>
+	<%end%>
+	<div class= "box_round" style="margin:10px;width:76.5%;border:1px solid gray;padding:8px;background:#BFEFFF">
 		<p><%=comm.author%> writes:</p>
 		<p><%=comm.body%></p>
-		<p>unique id:<%=comm.unique_id%></p>
-		<p>parent id:<%=comm.parent_id%></p>
 	</div>	
 <% end %>
 

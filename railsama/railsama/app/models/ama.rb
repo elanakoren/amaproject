@@ -2,15 +2,17 @@ require 'rubygems'
 require 'json'
 require 'net/http'
 require 'comment'
+#require 'bluecloth'
 
 class Ama < ActiveRecord::Base
-  attr_accessible :author, :url, :title, :date
+  attr_accessible :author, :url, :title, :date, :threadhash
   has_many :comments, :dependent => :destroy
   
   def download
     if date.nil? or Time.now - date > 60 # don't hit the same thread more than once per minute
       result = JSON.parse(Net::HTTP.get_response(URI.parse(url + ".json")).body)
-      h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'], :date => Time.now}
+      h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'],
+         :date => Time.now, :threadhash => result[0]['data']['children'][0]['data']['name']}
       self.update_attributes(h)
       toplevel(result)
     end
