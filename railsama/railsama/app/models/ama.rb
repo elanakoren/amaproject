@@ -2,7 +2,6 @@ require 'rubygems'
 require 'json'
 require 'net/http'
 require 'comment'
-#require 'bluecloth'
 
 class Ama < ActiveRecord::Base
   attr_accessible :author, :url, :title, :date, :threadhash

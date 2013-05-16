@@ -11,7 +11,8 @@
 	<%end%>
 	<div class= "box_round" style="margin:10px;width:76.5%;border:1px solid gray;padding:8px;background:#BFEFFF">
 		<p><%=comm.author%> writes:</p>
-		<p><%=comm.body%></p>
+		<p><%=raw m comm.body%></p>
+		<% markdown = RDiscount.new(comm.body)%>
 	</div>	
 <% end %>
 
