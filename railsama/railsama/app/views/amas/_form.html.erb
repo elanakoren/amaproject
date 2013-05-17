@@ -11,11 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div id ="frm">
+	<div class="group">
+  		<div class="field">
+    		<%= f.text_field :url %>
+  		</div>
+	</div>
+	<div class="group">
+  		<div class="actions">
+    		<%= f.submit %>
+  		</div>
+	</div>
+</div>
 <% end %>
