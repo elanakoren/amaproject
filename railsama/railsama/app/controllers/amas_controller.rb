@@ -1,3 +1,4 @@
+require 'snoo'
 class AmasController < ApplicationController
   # GET /amas
   # GET /amas.json

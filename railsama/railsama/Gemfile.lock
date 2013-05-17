@@ -42,6 +42,9 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.2)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
@@ -60,6 +63,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.2)
+    multi_xml (0.5.3)
+    nokogiri (1.5.9)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -93,6 +98,9 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    snoo (0.1.1)
+      httparty
+      nokogiri
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -126,6 +134,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rdiscount
   sass-rails (~> 3.2.3)
+  snoo
   sqlite3
   therubyracer
   twitter-bootstrap-rails (~> 2.2.6)
