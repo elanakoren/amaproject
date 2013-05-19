@@ -19,7 +19,13 @@
 
 .h1_centered {
 	position: relative;
-	top: 220px;
+	top: 50px;
+	left: 450px;
+}
+
+.h1_above {
+	position: relative;
+	top: 100px;
 	left: 450px;
 }
 
@@ -37,4 +43,10 @@
 
 #frm label {
     display:block;
+}
+
+.top_three {
+	position: relative;
+	top: 100px;	
+	left: 450px;
 }

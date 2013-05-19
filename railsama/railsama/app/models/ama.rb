@@ -2,6 +2,7 @@ require 'rubygems'
 require 'json'
 require 'net/http'
 require 'comment'
+require 'snoo'
 
 class Ama < ActiveRecord::Base
   attr_accessible :author, :url, :title, :date, :threadhash
@@ -42,4 +43,17 @@ class Ama < ActiveRecord::Base
     comment.ama = self
     comment.save
   end
+  
+  def self.topthree()
+     reddit = Snoo::Client.new
+     toplink = reddit.get_listing({:subreddit =>"IAMA", :page=>"top", :t =>"day", :limit=>1})
+     parse_me = toplink['data']['children'][0]['data']['url'] + ".json"
+     result = JSON.parse(Net::HTTP.get_response(URI.parse(parse_me)).body)
+     @topama = Ama.find_or_create_by_threadhash(result[0]['data']['children'][0]['data']['name'])
+     h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'],
+        :date => Time.now, :threadhash => result[0]['data']['children'][0]['data']['name'],
+        :url => result[0]['data']['children'][0]['data']['url']}
+     @topama.update_attributes(h)
+     @topama.toplevel(result)
+   end
 end
