@@ -44,7 +44,7 @@ class Ama < ActiveRecord::Base
     comment.save
   end
   
-  def self.topthree()
+  def self.top_three()
      reddit = Snoo::Client.new
      toplink = reddit.get_listing({:subreddit =>"IAMA", :page=>"top", :t =>"day", :limit=>1})
      parse_me = toplink['data']['children'][0]['data']['url'] + ".json"
@@ -55,5 +55,6 @@ class Ama < ActiveRecord::Base
         :url => result[0]['data']['children'][0]['data']['url']}
      @topama.update_attributes(h)
      @topama.toplevel(result)
+     return @topama.id
    end
 end

@@ -1,8 +1,6 @@
-
-
 <h1 class="h1_centered">Enter the URL of an AMA:</h1>
 
 <%= render 'form' %>
- 
-<% Ama.topthree %>
 
+<% top_title = Ama.find(Ama.top_three).title%> 
+<%= link_to top_title, ama_path(Ama.top_three) %>
