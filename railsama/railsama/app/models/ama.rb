@@ -46,7 +46,7 @@ class Ama < ActiveRecord::Base
   
   def self.top_three()
      reddit = Snoo::Client.new
-     toplink = reddit.get_listing({:subreddit =>"IAMA", :page=>"top", :t =>"day", :limit=>1})
+     toplink = reddit.get_listing({:subreddit =>"IAMA", :page=>"top", :t =>"day", :limit=>3})
      parse_me = toplink['data']['children'][0]['data']['url'] + ".json"
      result = JSON.parse(Net::HTTP.get_response(URI.parse(parse_me)).body)
      @topama = Ama.find_or_create_by_threadhash(result[0]['data']['children'][0]['data']['name'])

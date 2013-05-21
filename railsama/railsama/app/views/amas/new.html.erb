@@ -3,4 +3,7 @@
 <%= render 'form' %>
 
 <% top_title = Ama.find(Ama.top_three).title%> 
-<%= link_to top_title, ama_path(Ama.top_three) %>
+
+<div class="top_three">
+	<%= link_to top_title, ama_path(Ama.top_three) %>
+</div>
