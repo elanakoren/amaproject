@@ -1,6 +1,6 @@
-require 'rdiscount'
+require 'bluecloth'
 module AmasHelper
   def m(string)
-    RDiscount.new(string).to_html.html_safe
+    BlueCloth.new(string).to_html()
   end
 end
