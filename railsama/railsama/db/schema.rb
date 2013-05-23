@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515210913) do
+ActiveRecord::Schema.define(:version => 20130523050710) do
 
   create_table "amas", :force => true do |t|
     t.string   "url"
