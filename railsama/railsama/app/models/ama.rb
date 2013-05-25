@@ -57,4 +57,14 @@ class Ama < ActiveRecord::Base
      @topama.toplevel(result)
      return @topama.id
    end
+   
+   def display_thread(uid, list)
+     comments.each do |comm|
+       if comm.parent_id == uid
+         list.push(comm)
+         display_thread(comm.unique_id, list)
+       end
+    end
+    return list
+  end
 end

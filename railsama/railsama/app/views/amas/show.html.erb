@@ -5,15 +5,13 @@
 </h1>
 
 <%@ama.comments.each do |comm|%>
-	<%if comm.parent_id == @ama.threadhash %>
-		<br>
-		<br>
+	<%if comm.parent_id == @ama.threadhash %> <br><br>
+		<%@thread = @ama.display_thread(comm.unique_id, [comm])%>
+		<%@thread.each do |threadcomm|%>
+			<div class= "box_round" style="margin:10px;width:76.5%;border:1px solid gray;padding:8px;background:#BFEFFF;">
+				<p><%=threadcomm.author%> writes:</p>
+				<p><%=raw m threadcomm.body%></p>
+			</div>
+		<%end%>
 	<%end%>
-	<div class= "box_round" style="margin:10px;width:76.5%;border:1px solid gray;padding:8px;background:#BFEFFF;">
-		<p><%=comm.author%> writes:</p>
-		<p><%=raw m comm.body%></p>
-	</div>	
 <% end %>
-
-<%= link_to 'Edit', edit_ama_path(@ama) %> |
-<%= link_to 'Back', amas_path %>
