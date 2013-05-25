@@ -5,6 +5,6 @@
 <% top_title = Ama.find(Ama.top_three).title%> 
 
 <div class="top_link">
-	<h2> Today's most popular AMA: </h2>
-	<%= link_to top_title, ama_path(Ama.top_three) %>
+	<h2 class="h2_centered"> Today's most popular AMA: </h2>
+	<h3 class="h3_centered"><%= link_to top_title, ama_path(Ama.top_three) %> </h3>
 </div>
