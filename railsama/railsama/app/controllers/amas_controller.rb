@@ -4,17 +4,8 @@ require 'net/http'
 class AmasController < ApplicationController
   # GET /amas
   # GET /amas.json
-  before_filter :ban_pages, except: [:index, :show, :new]
+  before_filter :ban_pages, except: [:show, :new]
   
-  def index
-    @amas = Ama.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @amas }
-    end
-  end
-
   # GET /amas/1
   # GET /amas/1.json
   def show
