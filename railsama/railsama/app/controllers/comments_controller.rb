@@ -6,6 +6,7 @@ require 'comment'
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
+  before_filter :ban_pages
   def index
     @comments = Comment.all
 

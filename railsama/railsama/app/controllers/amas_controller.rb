@@ -4,6 +4,8 @@ require 'net/http'
 class AmasController < ApplicationController
   # GET /amas
   # GET /amas.json
+  before_filter :ban_pages, except: [:index, :show, :new]
+  
   def index
     @amas = Ama.all
 
