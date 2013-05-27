@@ -6,6 +6,8 @@ require 'snoo'
 
 class Ama < ActiveRecord::Base
   attr_accessible :author, :url, :title, :date, :threadhash
+  validates :url, :format => { :with => /(http:\/\/)?(www\.)?reddit\.com\/r\/IAmA\/comments\/[a-z0-9\/_]*i/,
+    :message => "That doesn't look like the URL of an AMA."}
   has_many :comments, :dependent => :destroy
   
   def download

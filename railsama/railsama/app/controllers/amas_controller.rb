@@ -4,7 +4,7 @@ require 'net/http'
 class AmasController < ApplicationController
   # GET /amas
   # GET /amas.json
-  before_filter :ban_pages, except: [:show, :new]
+  #before_filter :ban_pages, except: [:show, :new]
   
   # GET /amas/1
   # GET /amas/1.json
