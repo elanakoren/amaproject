@@ -13,27 +13,27 @@
 	line-height: 1.3;
 }
 
-.h1_centered {
-	position: relative;
+#col1
+{
+	float: left;
+	width: 48%;
+	margin-left: 3%;
+	
+}
+	
+#col2
+{
 	width: 600px;
-	top: 50px;
-	margin: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.h2_centered {
-	position: relative;
-	width: 590px;
-	font-size: 140%;
-	top: 0px;
-	margin: auto;
-}
-
-.h3_centered {
-	position: relative;
-	width: 590px;
-	font-size: 100%;
-	top: 0px;
-	margin: auto;
+#col3
+{
+	float: left;
+	width: 20%;
+	margin-left: 3%;
 }
 
 #frm .group {
@@ -43,18 +43,14 @@
     padding-right: 6px;
 	text-align:center;
 	width:175px;
-	top: 100px; /* distance from top */
-	left: 550px; /* distance from left */
-	
 }
 
 #frm label {
     display:block;
 }
 
-.top_link {
-	position: relative;
-	width: 600px;
-	top: 300px;
-	margin: auto; 
+h2, p
+{
+	margin-left: 7px;
+	margin-right: 7px;
 }
