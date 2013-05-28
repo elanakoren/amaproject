@@ -46,18 +46,22 @@ class Ama < ActiveRecord::Base
     comment.save
   end
   
-  def self.top_three()
+  def self.top_three(threadhash)
      reddit = Snoo::Client.new
-     toplink = reddit.get_listing({:subreddit =>"IAMA", :page=>"top", :t =>"day", :limit=>3})
-     parse_me = toplink['data']['children'][0]['data']['url'] + ".json"
-     result = JSON.parse(Net::HTTP.get_response(URI.parse(parse_me)).body)
-     @topama = Ama.find_or_create_by_threadhash(result[0]['data']['children'][0]['data']['name'])
-     h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'],
-        :date => Time.now, :threadhash => result[0]['data']['children'][0]['data']['name'],
-        :url => result[0]['data']['children'][0]['data']['url']}
-     @topama.update_attributes(h)
-     @topama.toplevel(result)
-     return @topama.id
+     toplink = reddit.get_listing({:subreddit =>"IAMA", :page=>"top", :t =>"day", :limit=>1, :after=>threadhash})
+     if !toplink['data']['children'][0]['data']['title'].downcase.include? "request"
+       parse_me = toplink['data']['children'][0]['data']['url'] + ".json"
+       result = JSON.parse(Net::HTTP.get_response(URI.parse(parse_me)).body)
+       @topama = Ama.find_or_create_by_threadhash(result[0]['data']['children'][0]['data']['name'])
+       h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'],
+         :date => Time.now, :threadhash => result[0]['data']['children'][0]['data']['name'],
+         :url => result[0]['data']['children'][0]['data']['url']}
+      @topama.update_attributes(h)
+      @topama.toplevel(result)
+      return @topama.id
+    else 
+      top_three(toplink['data']['children'][0]['data']['name'])
+    end
    end
    
    def display_thread(uid, list)
