@@ -3,10 +3,12 @@ require 'json'
 require 'net/http'
 require 'comment'
 require 'snoo'
+require 'uri'
 
 class Ama < ActiveRecord::Base
   attr_accessible :author, :url, :title, :date, :threadhash
-  validates :url, :format => { :with => /(http:\/\/)?(www\.)?reddit\.com\/r\/IAmA\/comments\/[a-z0-9\/_]*i/,
+  before_validation :add_url_protocol
+  validates :url, :format => { :with => /(http:\/\/)?(www\.)?reddit\.com\/r\/IAmA\/comments\/[A-Za-z0-9\/_]*/,
     :message => "That doesn't look like the URL of an AMA."}
   has_many :comments, :dependent => :destroy
   
@@ -20,6 +22,12 @@ class Ama < ActiveRecord::Base
     end
   end
   
+  def add_url_protocol
+    unless self.url[/^http:\/\//]
+      self.url = 'http://' + self.url
+    end
+  end
+
    def toplevel(result)    
      result[1]['data']['children'].each do |x|
        traverse_thread(x['data'], nil)
@@ -52,7 +60,7 @@ class Ama < ActiveRecord::Base
      if !toplink['data']['children'][0]['data']['title'].downcase.include? "request"
        parse_me = toplink['data']['children'][0]['data']['url'] + ".json"
        result = JSON.parse(Net::HTTP.get_response(URI.parse(parse_me)).body)
-       @topama = Ama.find_or_create_by_threadhash(result[0]['data']['children'][0]['data']['name'])
+       @topama = Ama.find_or_create_by_url(result[0]['data']['children'][0]['data']['url'])
        h = {:author => result[0]['data']['children'][0]['data']['author'], :title => result[0]['data']['children'][0]['data']['title'],
          :date => Time.now, :threadhash => result[0]['data']['children'][0]['data']['name'],
          :url => result[0]['data']['children'][0]['data']['url']}

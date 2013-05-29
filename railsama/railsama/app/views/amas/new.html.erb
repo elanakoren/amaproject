@@ -11,16 +11,17 @@
 	<h2>Enter the URL of an AMA:</h2>
 
 	<%= render 'form' %>
-
+	
+	
 	<% top_title = Ama.find(Ama.top_three(nil)).title%> 
-	
+
 	<br>
 	<br>
 	<br>
 	<br>
 	<br>
 	<br>
-	
+
 
 	<h3> Or read today's most popular AMA: </h3>
 	<h3 class="small"><%= link_to top_title, ama_path(Ama.top_three(nil)) %> </h3>
