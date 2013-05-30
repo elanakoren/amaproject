@@ -1,7 +1,13 @@
-Railsama::Application.routes.draw do 
+Railsama::Application.routes.draw do
   
   root :to => 'amas#new'
   resources :amas
+  
+  match ':about' => 'staticpage#about', :as => 'about'
+  
+  
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
