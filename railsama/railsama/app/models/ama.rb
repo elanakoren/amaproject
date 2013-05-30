@@ -8,7 +8,8 @@ require 'uri'
 class Ama < ActiveRecord::Base
   attr_accessible :author, :url, :title, :date, :threadhash
   before_validation :add_url_protocol
-  validates :url, :format => { :with => /(http:\/\/)?(www\.)?reddit\.com\/r\/IAmA\/comments\/[A-Za-z0-9\/_]*/,
+  regexurl = Regexp.new("(http:\/\/)?www\.reddit\.com\/r\/IAmA\/comments\/[a-z0-9\/_]*", "i")
+  validates :url, :format => { :with => regexurl,
     :message => "That doesn't look like the URL of an AMA."}
   has_many :comments, :dependent => :destroy
   
