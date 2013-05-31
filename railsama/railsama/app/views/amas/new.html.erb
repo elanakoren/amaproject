@@ -13,7 +13,7 @@
 	<%= render 'form' %>
 	
 	
-	<% top_title = Ama.find(Ama.top_three(nil)).title%> 
+	<% top_title = Ama.find(Ama.top_link(nil)).title%> 
 
 	<br>
 	<br>
@@ -24,7 +24,7 @@
 
 
 	<h3> Or read today's most popular AMA: </h3>
-	<h3 class="small"><%= link_to top_title, ama_path(Ama.top_three(nil)) %> </h3>
+	<h3 class="small"><%= link_to top_title, ama_path(Ama.top_link(nil)) %> </h3>
 	
 	<br>
 	<br>
@@ -33,6 +33,6 @@
 	<br>
 	<br>
 	<p class="center"><%= link_to "About this site", about_path('about')%> |
-	<a href="http://www.github.com/elanakoren/amaproject">Source code</a></p>
+	<a href="https://github.com/elanakoren/amaproject/tree/master/railsama/railsama">Source code</a></p>
 </div>
 </body>
