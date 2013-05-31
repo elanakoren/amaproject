@@ -1,9 +1,0 @@
-<%= form_tag do %>
-	<%= form_tag("/convert", :method => "get") do %>
-	<%= label_tag(:q, "Enter the URL of the AMA you'd like to convert") %>
-  	<%= text_field(:id, :start_download) %>
-  	<%= submit_tag("Convert") %>
-	<% end %>
-<% end %>
-
-<%= params[:id] %>
