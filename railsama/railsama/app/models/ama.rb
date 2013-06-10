@@ -69,7 +69,7 @@ class Ama < ActiveRecord::Base
       @topama.toplevel(result)
       return @topama.id
     else 
-      top_three(toplink['data']['children'][0]['data']['name'])
+      top_link(toplink['data']['children'][0]['data']['name'])
     end
    end
    
